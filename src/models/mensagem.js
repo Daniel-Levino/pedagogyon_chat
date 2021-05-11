@@ -11,20 +11,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Mensagem.belongsTo(models.Cliente,{
-        foreignKey: "idCliente",
-        targetKey:"id"
+      Mensagem.belongsTo(models.Usuario, {
+        foreignKey: "idOrigem",
+        targetKey: "id"
       })
-      Mensagem.belongsTo(models.Profissional,{
-        foreignKey: "idProfissional",
-        targetKey:"id"
+      Mensagem.belongsTo(models.Usuario, {
+        foreignKey: "idDestino",
+        targetKey: "id"
       })
     }
   };
   Mensagem.init({
-    idCliente: DataTypes.INTEGER,
-    idProfissional: DataTypes.INTEGER,
-    dataHora: DataTypes.DATEONLY,
+    idOrigem: DataTypes.INTEGER,
+    idDestino: DataTypes.INTEGER,
+    dataHora: DataTypes.DATE,
     mensagem: DataTypes.TEXT
   }, {
     sequelize,

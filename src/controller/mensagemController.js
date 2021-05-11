@@ -7,8 +7,8 @@ exports.listAll = (req, res) => {
 }
 
 exports.creatOne = (req, res) => {
-    const {idCliente,idProfissional,dataHora,mensagem} = req.body
-    Mensagem.create({idCliente,idProfissional,dataHora,mensagem})
+    const {idOrigem,idDestino,dataHora,mensagem} = req.body
+    Mensagem.create({idOrigem,idDestino,dataHora,mensagem})
         .then(mensagem => {res.send(mensagem)})
         .catch(error => {res.send(error)})
 }
@@ -20,9 +20,9 @@ exports.listOne = (req, res) => {
 }
 
 exports.updateOne = (req, res) => {
-    const {idCliente,idProfissional,dataHora,mensagem} = req.body
+    const {idOrigem,idDestino,dataHora,mensagem} = req.body
     Mensagem.update(
-        {idCliente,idProfissional,dataHora,mensagem},
+        {idOrigem,idDestino,dataHora,mensagem},
         {where:{id:req.params.id}})
         .then(mensagem => {res.send(mensagem)})
         .catch(error => {res.send(error)})

@@ -1,11 +1,11 @@
-const cliente = require('../controller/clienteController')
+const usuario = require('../controller/usuarioController')
 module.exports = function (app) {
-    app.route('/cliente')
-        .get(cliente.listAll)
-        .post(cliente.creatOne)
+    app.route('/usuario')
+        .get(usuario.listAll)
+        .post(usuario.creatOne)
     
-    app.route('/cliente/:id')
-        .get(cliente.listOne)
-        .put(cliente.updateOne)
-        .delete(cliente.deleteOne)
+    app.route('/usuario/:id')
+        .get(usuario.listOne)
+        .put(usuario.updateOne)
+        .delete(usuario.deleteOne)
 }

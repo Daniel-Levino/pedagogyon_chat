@@ -8,26 +8,26 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idCliente: {
-        field: "idCliente",
-        allowNull: false,
+      idOrigem: {
+        field: "idOrigem",
+        allowNull:false,
         type: Sequelize.INTEGER,
         references: {
-          model: "Clientes",
+          model: "Usuarios",
           key: "id"
         }
       },
-      idProfissional: {
-        field: "idProfissional",
-        allowNull: false,
+      idDestino: {
+        field: "idDestino",
+        allowNull:false,
         type: Sequelize.INTEGER,
         references: {
-          model: "Profissionals",
+          model: "Usuarios",
           key: "id"
         }
       },
       dataHora: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATE
       },
       mensagem: {
         type: Sequelize.TEXT
