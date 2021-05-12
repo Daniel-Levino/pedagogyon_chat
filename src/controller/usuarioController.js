@@ -1,5 +1,6 @@
 const Usuario = require('../models').Usuario
 const multer = require('multer')
+const {v4:uuidv4} = require('uuid')
 
 exports.listAll = (req, res) => {
     Usuario.findAll()
@@ -24,8 +25,9 @@ exports.listOne = (req, res) => {
 }
 
 exports.updateOne = (req, res) => {
-    const {nome,email,senha,especializacao} = req.body
-    const imagem = "/uploads/profile_"+req.params.id+".jpg"
+    const {nome,email,senha,especializacao,imagem} = req.body
+    //const imagem = "/uploads/profile_"+req.params.id+".jpg"
+    
     Usuario.update(
         {nome,email,senha,especializacao,imagem},
         {where:{id:req.params.id}})
