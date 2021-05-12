@@ -4,10 +4,12 @@ const app = express()
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
-const cliente = require('./src/routes/clienteRoutes')
+const usuario = require('./src/routes/usuarioRoutes')
 const mensagem = require('./src/routes/mensagemRoute')
 
-cliente(app)
+usuario(app)
 mensagem(app)
+
+app.use('/uploads', express.static('uploads'))
 
 module.exports = (app)

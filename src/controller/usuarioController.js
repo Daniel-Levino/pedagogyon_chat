@@ -1,4 +1,5 @@
 const Usuario = require('../models').Usuario
+const multer = require('multer')
 
 exports.listAll = (req, res) => {
     Usuario.findAll()
@@ -9,7 +10,10 @@ exports.listAll = (req, res) => {
 exports.creatOne = (req, res) => {
     const {nome,email,senha,especializacao,imagem} = req.body
     Usuario.create({nome,email,senha,especializacao,imagem})
-        .then(usuario => {res.send(usuario)})
+        .then(
+            usuario => {res.send(usuario)},
+            console.log(req.file)
+            )
         .catch(error => {res.send(error)})
 }
 
@@ -20,7 +24,8 @@ exports.listOne = (req, res) => {
 }
 
 exports.updateOne = (req, res) => {
-    const {nome,email,senha,especializacao,imagem} = req.body
+    const {nome,email,senha,especializacao} = req.body
+    const imagem = "/uploads/profile_"+req.params.id+".jpg"
     Usuario.update(
         {nome,email,senha,especializacao,imagem},
         {where:{id:req.params.id}})
