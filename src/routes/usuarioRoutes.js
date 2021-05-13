@@ -6,8 +6,7 @@ const storage = multer.diskStorage({
         cb(null, './uploads/')
     },
     filename: function(req,file,cb){
-        //cb(null, "profile_"+req.params.id+".jpg")
-        cb(null, uuidv4()+".jpg")
+        cb(null, "profile_"+req.params.id+".jpg")
     }
 })
 const fileFilter = (req,file,cb) =>{

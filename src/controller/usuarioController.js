@@ -1,6 +1,6 @@
 const Usuario = require('../models').Usuario
 const multer = require('multer')
-const {v4:uuidv4} = require('uuid')
+const bcrypt = require('bcrypt')
 
 exports.listAll = (req, res) => {
     Usuario.findAll()
@@ -9,13 +9,17 @@ exports.listAll = (req, res) => {
 }
 
 exports.creatOne = (req, res) => {
-    const {nome,email,senha,especializacao,imagem} = req.body
-    Usuario.create({nome,email,senha,especializacao,imagem})
-        .then(
-            usuario => {res.send(usuario)},
-            console.log(req.file)
-            )
-        .catch(error => {res.send(error)})
+    bcrypt.hash(req.body.senha,10,(errBcrypt,senha)=>{
+        if(errBcrypt){return res.status(500).send({error:errBcrypt})}
+        
+        const {nome,email,especializacao,imagem} = req.body
+        Usuario.create({nome,email,senha,especializacao,imagem})
+            .then(
+                usuario => {res.send(usuario)},
+                console.log(req.file)
+                )
+            .catch(error => {res.send(error)})
+    })
 }
 
 exports.listOne = (req, res) => {
@@ -25,8 +29,8 @@ exports.listOne = (req, res) => {
 }
 
 exports.updateOne = (req, res) => {
-    const {nome,email,senha,especializacao,imagem} = req.body
-    //const imagem = "/uploads/profile_"+req.params.id+".jpg"
+    const {nome,email,senha,especializacao} = req.body
+    const imagem = "/uploads/profile_"+req.params.id+".jpg"
     
     Usuario.update(
         {nome,email,senha,especializacao,imagem},
